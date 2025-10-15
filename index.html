@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Heritage | Twitch Freelancer Portfolio</title>
+  <style>
+    /* ===== BASE ===== */
+    :root{
+      --accent:#9146ff;
+      --accent-2:#b26bff;
+      --bg-1:#0f0f12;
+      --muted:#ccc;
+    }
+    *{box-sizing:border-box}
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #0e0e10 0%, #131316 100%);
+      color: #f4f4f4;
+      overflow-x: hidden;
+      position: relative;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* ===== MOUSE GLOW TRAIL ===== */
+    .glow-trail {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(145,70,255,0.45) 0%, transparent 70%);
+      pointer-events: none;
+      mix-blend-mode: screen;
+      transform: translate(-50%, -50%);
+      transition: all 0.12s linear;
+      z-index: 9999;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(145,70,255,0.14), transparent 70%),
+        radial-gradient(circle at 70% 80%, rgba(255,0,120,0.10), transparent 70%),
+        var(--bg-1);
+      animation: bgPulse 10s ease-in-out infinite alternate;
+      padding: 40px 24px;
+      gap: 18px;
+    }
+
+    @keyframes bgPulse {
+      from { background-position: 0% 50%; }
+      to { background-position: 100% 50%; }
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      color: var(--accent);
+      text-shadow: 0 0 25px rgba(145,70,255,0.85);
+      margin: 0;
+      letter-spacing: 0.6px;
+    }
+
+    header .sub {
+      color: var(--muted);
+      margin-top: 6px;
+      font-size: 1.05rem;
+      max-width: 900px;
+    }
+
+    /* typing effect (cosmetic) */
+    header h1 span {
+      border-right: 2px solid rgba(255,255,255,0.6);
+      display: inline-block;
+      padding-right: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 4s steps(18) infinite, blink 1s step-end infinite alternate;
+    }
+    @keyframes typing { 0%{ width:0 } 50%{ width:100% } 100%{ width:0 } }
+    @keyframes blink { from{border-color:transparent} to{border-color:rgba(255,255,255,0.6)} }
+
+    /* ===== NAVIGATION BUTTONS ===== */
+    .nav-buttons {
+      display: flex;
+      gap: 14px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      z-index: 3;
+    }
+    .nav-buttons a {
+      margin: 6px;
+      padding: 12px 26px;
+      color: white;
+      text-decoration: none;
+      background: linear-gradient(90deg,var(--accent),var(--accent-2));
+      border-radius: 30px;
+      font-weight: 600;
+      box-shadow: 0 8px 18px rgba(145,70,255,0.18);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .nav-buttons a:hover{ transform: translateY(-6px) scale(1.05); box-shadow: 0 18px 40px rgba(145,70,255,0.28) }
+
+    /* ===== SOCIAL LINKS (below nav) ===== */
+    .socials {
+      margin-top: 12px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:center;
+      z-index:3;
+    }
+    .socials a{
+      padding:8px 14px;
+      border-radius:999px;
+      background:transparent;
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      border:1px solid rgba(255,255,255,0.06);
+      transition: all .2s;
+    }
+    .socials a:hover{ color:var(--accent); box-shadow:0 8px 24px rgba(145,70,255,0.12); transform: translateY(-4px) }
+
+    /* ===== SECTIONS ===== */
+    section{ padding:80px 20px; text-align:center; position:relative }
+    h2{ color:var(--accent-2); font-size:clamp(1.6rem,3.2vw,2.5rem); margin:0 0 18px; text-shadow:0 0 12px rgba(145,70,255,0.45) }
+    p{ color:var(--muted); max-width:980px; margin:0 auto; line-height:1.7; font-size:1.03rem }
+
+    /* ===== PORTFOLIO ===== */
+    .portfolio{ display:flex; flex-wrap:wrap; justify-content:center; gap:22px; margin-top:18px }
+    .portfolio img{
+      width:320px; height:auto; border-radius:16px;
+      background:rgba(255,255,255,0.03);
+      box-shadow: 0 8px 36px rgba(145,70,255,0.18);
+      transition: transform .55s cubic-bezier(.2,.9,.3,1), box-shadow .45s;
+      border: 3px solid transparent;
+    }
+    .portfolio img:hover{
+      transform: translateY(-8px) scale(1.07) rotateY(6deg);
+      box-shadow: 0 28px 70px rgba(145,70,255,0.28);
+      border: 3px solid rgba(145,70,255,0.85);
+    }
+
+    /* ===== VIDEOS ===== */
+    .videos{
+      display:flex; gap:28px; justify-content:center; flex-wrap:wrap; margin-top:18px;
+    }
+    .videos video{
+      width:100%; max-width:520px; border-radius:14px; box-shadow:0 18px 50px rgba(0,0,0,0.6);
+      outline: 2px solid rgba(145,70,255,0.08);
+      transition: transform .25s, box-shadow .25s;
+      background:#000;
+    }
+    .videos video:hover{ transform:scale(1.03); box-shadow:0 28px 80px rgba(145,70,255,0.28) }
+
+    /* ===== SERVICES ===== */
+    .services{ background: rgba(255,255,255,0.02); border-top:2px solid rgba(145,70,255,0.12); border-bottom:2px solid rgba(145,70,255,0.12); }
+    .service-list{ display:flex; gap:28px; justify-content:center; flex-wrap:wrap; margin-top:24px }
+    .service{
+      width:280px; padding:26px; border-radius:16px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow:0 16px 36px rgba(145,70,255,0.12); transition: transform .28s, box-shadow .28s;
+      backdrop-filter: blur(6px);
+    }
+    .service h3{ color:var(--accent); margin:0 0 8px }
+    .service:hover{ transform:translateY(-10px) scale(1.03); box-shadow:0 32px 90px rgba(145,70,255,0.18) }
+
+    /* ===== FEEDBACK ===== */
+    .feedback{ background: transparent; margin-top:10px }
+    .feedback-box{
+      max-width:760px; margin:18px auto; padding:22px; border-radius:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow:0 14px 40px rgba(145,70,255,0.08)
+    }
+    .feedback-box p{ margin:0; color:#e9e9e9; font-style:italic }
+    .feedback-box span{ display:block; margin-top:10px; color:var(--accent); font-weight:700 }
+
+    /* ===== CONTACT ===== */
+    .contact a{ display:inline-block; margin-top:18px; background:linear-gradient(90deg,var(--accent),#ff5adb); color:#fff; padding:14px 28px; border-radius:999px; text-decoration:none; font-weight:800; box-shadow:0 18px 50px rgba(145,70,255,0.14) }
+    .contact a:hover{ transform:translateY(-6px); box-shadow:0 32px 80px rgba(145,70,255,0.22) }
+
+    footer{ background:#07070a; color:#9a9a9a; padding:28px; text-align:center; font-size:0.92rem; margin-top:10px }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width:900px){
+      .portfolio img{ width:90% }
+      .videos video{ max-width:92% }
+      .service{ width:92% }
+      header{ padding-top:50px; padding-bottom:50px }
+    }
+  </style>
+</head>
+<body>
+  <!-- mouse glow -->
+  <div class="glow-trail" id="glow"></div>
+
+  <!-- header: nav buttons then socials -->
+  <header>
+    <h1><span>Welcome to Heritage</span></h1>
+    <div class="sub">Twitch Freelancer • Editor • Designer • Creator</div>
+
+    <div class="nav-buttons" aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </div>
+
+    <div class="socials" aria-label="Social links">
+      <a href="https://www.twitch.tv/heritage0424" target="_blank" rel="noreferrer">Twitch</a>
+      <a href="https://www.youtube.com/@Heritage0424" target="_blank" rel="noreferrer">YouTube</a>
+      <a href="https://tiktok.com/@heritage0424" target="_blank" rel="noreferrer">TikTok</a>
+    </div>
+  </header>
+
+  <!-- about -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Hey! I'm <strong>Heritage</strong> a creative Twitch freelancer who brings energy and style to every project. I design, edit, and create visuals that make you stand out. Every pixel, every motion, every second perfected.</p>
+  </section>
+
+  <!-- portfolio -->
+  <section id="portfolio">
+    <h2>My Designs</h2>
+    <div class="portfolio" role="list">
+      <img src="IMG-20250424-WA0006.jpg" alt="Design 1" role="listitem">
+      <img src="IMG-20250424-WA0005.jpg" alt="Design 2" role="listitem">
+      <img src="IMG-20250424-WA0007.jpg" alt="Design 3" role="listitem">
+      <img src="IMG-20250511-WA0010.jpg" alt="Design 4" role="listitem">
+      <img src="IMG-20250325-WA00832.jpg" alt="Design 5" role="listitem">
+    </div>
+  </section>
+
+  <!-- streamer testimonials (VIDEOS) - restored -->
+  <section id="testimonials">
+    <h2>Streamer Testimonials</h2>
+    <p style="margin-bottom:18px">Short clips from streamers who worked with me edits, overlays, and promos in-action.</p>
+    <div class="videos" aria-label="Streamer videos">
+      <video controls preload="metadata">
+        <source src="VID-20250809-WA0004-1-1.mp4" type="video/mp4">
+        Your browser doesn't support HTML5 video.
+      </video>
+
+      <video controls preload="metadata">
+        <source src="VID-20250810-WA0000-1-2.mp4" type="video/mp4">
+        Your browser doesn't support HTML5 video.
+      </video>
+    </div>
+  </section>
+
+  <!-- services -->
+  <section id="services" class="services">
+    <h2>What I Offer</h2>
+    <div class="service-list" role="list">
+      <div class="service" role="listitem">
+        <h3>Video Editing</h3>
+        <p>Clean, dynamic, and professional edits for Twitch, YouTube, and social content that keep eyes glued to the screen.</p>
+      </div>
+      <div class="service" role="listitem">
+        <h3>Graphic Design</h3>
+        <p>Logos, overlays, and banners that define your brand’s identity and leave a lasting impression.</p>
+      </div>
+      <div class="service" role="listitem">
+        <h3>Animation</h3>
+        <p>Custom animated intros, outros, and transitions that boost your production quality instantly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- feedback -->
+  <section class="feedback">
+    <h2>Client Feedback</h2>
+    <div class="feedback-box">
+      <p>Heritage transformed my Twitch channel with amazing edits professional, creative, and fast!</p>
+      <span>Twitch Streamer: otfgator</span>
+    </div>
+    <div class="feedback-box">
+      <p>I love how he understood my vision instantly. Everything came out top tier!</p>
+      <span>Twitch Streamer: s420lew</span>
+    </div>
+  </section>
+
+  <!-- contact -->
+  <section id="contact" class="contact">
+    <h2>Let’s Work Together</h2>
+    <p>Want visuals that impress, engage, and convert? Reach out I’ll make your brand unforgettable.</p>
+    <a href="mailto:heritagestar15@gmail.com">Contact Me</a>
+  </section>
+
+  <footer>
+    <p>© 2025 Heritage | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // mouse trail
+    const glow = document.getEle
